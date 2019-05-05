@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+DNUGPBBot/appsettings.json
+DNUGPBBot/Resources/ApiKeys.cs
+DNUGPBBot/wwwroot/default.htm
