@@ -34,7 +34,13 @@ namespace DNUGPBBot
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            await RunDialog(turnContext, cancellationToken);
+            var dialogContext = await _dialogSet.CreateContextAsync(turnContext, cancellationToken);
+            var results = await dialogContext.ContinueDialogAsync(cancellationToken);
+
+            if (results.Status == DialogTurnStatus.Empty)
+            {
+                await RunDialog(turnContext, cancellationToken);
+            }
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
@@ -76,14 +82,10 @@ namespace DNUGPBBot
         private async Task RunDialog(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var dialogContext = await _dialogSet.CreateContextAsync(turnContext, cancellationToken);
-            var results = await dialogContext.ContinueDialogAsync(cancellationToken);
 
-            if (results.Status == DialogTurnStatus.Empty)
-            {
-                // await dialogContext.BeginDialogAsync(nameof(SearchDialogBasic), null, cancellationToken);
-                // await dialogContext.BeginDialogAsync(nameof(RootDialogBasic), null, cancellationToken);
-                await dialogContext.BeginDialogAsync(nameof(RootDialogExtendedUI), null, cancellationToken);
-            }
+            // await dialogContext.BeginDialogAsync(nameof(SearchDialogBasic), null, cancellationToken);
+            // await dialogContext.BeginDialogAsync(nameof(RootDialogBasic), null, cancellationToken);
+            await dialogContext.BeginDialogAsync(nameof(RootDialogExtendedUI), null, cancellationToken);
         }
     }
 }
