@@ -14,7 +14,7 @@ namespace DNUGPBBot.Dialogs
             {
                 OptionDisplayStep,
                 OptionSelectionStep,
-                RestartStep,
+                RestartStep
             };
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), waterfallSteps));
@@ -23,7 +23,7 @@ namespace DNUGPBBot.Dialogs
             AddDialog(new RegistrationDialogBasic(nameof(RegistrationDialogBasic)));
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
-                Style = ListStyle.Inline
+                Style = ListStyle.List
             });
 
             InitialDialogId = nameof(WaterfallDialog);

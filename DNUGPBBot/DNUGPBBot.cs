@@ -83,9 +83,9 @@ namespace DNUGPBBot
         {
             var dialogContext = await _dialogSet.CreateContextAsync(turnContext, cancellationToken);
 
-            // await dialogContext.BeginDialogAsync(nameof(SearchDialogBasic), null, cancellationToken);
+            await dialogContext.BeginDialogAsync(nameof(SearchDialogBasic), null, cancellationToken);
             // await dialogContext.BeginDialogAsync(nameof(RootDialogBasic), null, cancellationToken);
-            await dialogContext.BeginDialogAsync(nameof(RootDialogExtendedUI), null, cancellationToken);
+            // await dialogContext.BeginDialogAsync(nameof(RootDialogExtendedUI), null, cancellationToken);
         }
     }
 }

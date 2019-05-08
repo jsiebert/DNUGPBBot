@@ -2,6 +2,7 @@
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
+using Microsoft.Bot.Schema;
 using System;
 using System.Linq;
 using System.Threading;
@@ -23,7 +24,7 @@ namespace DNUGPBBot.Dialogs
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), waterfallSteps));
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
-                Style = ListStyle.Inline
+                Style = ListStyle.List
             });
 
             InitialDialogId = nameof(WaterfallDialog);
@@ -69,7 +70,15 @@ namespace DNUGPBBot.Dialogs
                 return true;
             });
 
-            var choices = events.Select(e => e.Name).ToList();
+            var choices = events.Select(e => new Choice()
+            {
+                Value = e.Name,
+                Action = new CardAction()
+                {
+                    Title = e.Name.Split('.', 2).ElementAt(1).Trim(),
+                    Type = ActionTypes.ImBack
+                }
+            }).ToList();
 
             if (choices.Count > 0)
             {
@@ -77,7 +86,7 @@ namespace DNUGPBBot.Dialogs
                     new PromptOptions
                     {
                         Prompt = MessageFactory.Text("Select Event for details."),
-                        Choices = ChoiceFactory.ToChoices(choices),
+                        Choices = choices,
                         RetryPrompt = MessageFactory.Text("Please select a valid option!")
                     }, cancellationToken);
             }
