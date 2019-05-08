@@ -75,8 +75,18 @@ namespace DNUGPBBot
 
         private static async Task SendWelcomeMessage(ITurnContext turnContext, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync("Welcome to the Chatbot of the .NET User Group Paderborn!",
-                cancellationToken: cancellationToken);
+            var reply = turnContext.Activity.CreateReply();
+            var heroCard = new HeroCard();
+            heroCard.Text =
+                "**Welcome to the Chatbot of the .NET User Group Paderborn!** The purpose of this Chatbot is to demonstrate different techniques of the Microsoft Bot Framework. It does not have any real functionality.";
+            heroCard.Images = new List<CardImage>()
+            {
+                new CardImage("https://dnugpbbot.azurewebsites.net/dnug_300.png")
+            };
+
+            reply.Attachments = new List<Attachment>() { heroCard.ToAttachment() };
+
+            await turnContext.SendActivityAsync(reply, cancellationToken: cancellationToken);
         }
 
         private async Task RunDialog(ITurnContext turnContext, CancellationToken cancellationToken)
