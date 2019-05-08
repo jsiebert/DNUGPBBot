@@ -21,6 +21,7 @@ namespace DNUGPBBot.Dialogs
             AddDialog(new SearchDialogBasicExtendedUI(nameof(SearchDialogBasicExtendedUI)));
             AddDialog(new SearchDialogLuisExtendedUI(nameof(SearchDialogLuisExtendedUI)));
             AddDialog(new UserProfileDialog(nameof(UserProfileDialog), userState));
+            AddDialog(new RegistrationDialogBasic(nameof(RegistrationDialogBasic)));
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
                 Style = ListStyle.HeroCard
@@ -64,7 +65,7 @@ namespace DNUGPBBot.Dialogs
 
             if (selection.ToLower().StartsWith("register"))
             {
-                await stepContext.Context.SendActivityAsync("Event registration is currently not implemented!", cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(RegistrationDialogBasic), cancellationToken: cancellationToken);
             }
 
             return await stepContext.NextAsync(cancellationToken: cancellationToken);

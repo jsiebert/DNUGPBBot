@@ -20,6 +20,7 @@ namespace DNUGPBBot.Dialogs
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), waterfallSteps));
             AddDialog(new SearchDialogBasic(nameof(SearchDialogBasic)));
             AddDialog(new UserProfileDialog(nameof(UserProfileDialog), userState));
+            AddDialog(new RegistrationDialogBasic(nameof(RegistrationDialogBasic)));
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt))
             {
                 Style = ListStyle.Inline
@@ -62,7 +63,7 @@ namespace DNUGPBBot.Dialogs
 
             if (selection.ToLower().StartsWith("register"))
             {
-                await stepContext.Context.SendActivityAsync("Event registration is currently not implemented!", cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(RegistrationDialogBasic), cancellationToken: cancellationToken);
             }
 
             return await stepContext.NextAsync(cancellationToken: cancellationToken);
