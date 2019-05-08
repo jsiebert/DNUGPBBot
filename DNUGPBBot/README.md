@@ -21,7 +21,7 @@ Die .NET Variante des DNUGPBBot ist im Azure Bot Service verfügbar und kann unt
 * Die benötigten Schlüssel und IDs (siehe **Allgemeine Infos**) müssen in der Datei "ApiKeys.cs" im Verzeichnis "Resources" hinterlegt werden.
 * Die benötigten NuGet-Pakete müssen wiederhergestellt werden.
 * Der Chatbot kann über die Debug-Funktion von Visual Studio gestartet werden.
-* Zum Testen kann der Bot Framework Emulator verwendet werden. Die Endpoint URL lautet: <http://localhost:3979/api/messages>.
+* Zum Testen kann der Bot Framework Emulator verwendet werden. Die Endpoint URL lautet: <http://localhost:3978/api/messages>.
 * In verschiedenen Code-Dateien können unterschiedliche Funktionen durch ein-/auskommentieren an- bzw. ausgeschaltet werden:
     * **DNUGPBBot.cs (Zeile 83-85):** Wechsel zwischen einfachem SearchDialog und erweitertem Dialog-Flow (mit einfachem UI und erweitertem UI, z.B. AdaptiveCards).
     * **Dialogs/RootDialogExtendedUI.cs (Zeile 56-57):** Wechsel zwischen SearchDialog mit erweitertem UI und LUIS-basiertem SearchDialog.
